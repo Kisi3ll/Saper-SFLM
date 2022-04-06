@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
 # Proszę zmienić wymaganą wersję CMake na niższą - wystarczy 3.11
 
-project(Saper)
+project(Saper-SFML)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_CXX_STANDARD 14)
@@ -32,8 +32,9 @@ if (WIN32)
     set ( SFML_DIR "C:/SFLM cpp/SFML-2.5.1/lib/cmake/SFML")
 endif(WIN32)
 
+#znajdowanie odpowiednich komponentów z biblioteki SFML
+find_package(SFML 2 COMPONENTS window graphics audio REQUIRED)
 
-find_package(SFML 2 COMPONENTS graphics audio REQUIRED)
-
-add_executable(Saper main.cpp )
-target_link_libraries(Saper sfml-graphics sfml-audio)
+add_executable(Saper-SFML main.cpp MinesweeperB.cpp MSBoardTextView.cpp MSTextController.cpp MSSFMLView.cpp )
+#jakie dodatkowe nistandardowe biblioteki z SFML'a chcemy dołączyć
+target_link_libraries(Saper-SFML sfml-window sfml-graphics sfml-audio)

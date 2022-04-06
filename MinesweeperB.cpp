@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstdlib>
-#include <stdlib.h>
-#include <time.h>
+#include <ctime>
 #include "MinesweeperB.h"
 
 Plansza::Plansza(int szerokosc, int wysokosc, GameMode tryb):szerokosc(szerokosc), wysokosc(wysokosc), tryb(tryb){
@@ -131,9 +130,9 @@ int Plansza::countMines(int wiersz, int kolumna) const {
 bool Plansza::hasFlag(int wiersz, int kolumna) const{
     if(isOutofBoard(wiersz,kolumna)== true) return false;
     if(plansza[wiersz][kolumna].maFlage==1) return true;
-    if(wiersz>wysokosc-1 || kolumna>szerokosc-1) return false;
+    //if(wiersz>wysokosc-1 || kolumna>szerokosc-1) return false;
     if(plansza[wiersz][kolumna].maFlage==0) return false;
-    else if(plansza[wiersz][kolumna].czyUkryte==0) return false;
+    if(plansza[wiersz][kolumna].czyUkryte==0) return false;
     return 0;
 }
 
@@ -145,17 +144,7 @@ bool Plansza::hasFlag(int wiersz, int kolumna) const{
 //  void toggleFlag(int row, int col);
 
 void Plansza::toggleFlag(int wiersz, int kolumna){
-//    if (isOutofBoard(wiersz,kolumna) == true);
-//    else if (isRevealed(wiersz,kolumna) == true);
-//    else if (this->status == FINISHED_WIN or this->status == FINISHED_LOSS);
-//    else if (isRevealed(wiersz,kolumna) == false){
-//        if(plansza[wiersz][kolumna].maFlage){
-//            plansza[wiersz][kolumna].maFlage = false;
-//          if ( this->first_action == true) this->first_action = false;
-//        }
-//        else plansza[wiersz][kolumna].maFlage = true;
-//    }
-      if(isOutofBoard(wiersz,kolumna)== true) return ;
+      if(isOutofBoard(wiersz,kolumna)==1) return ;
       if(isRevealed(wiersz, kolumna)==0) plansza[wiersz][kolumna].maFlage=1;
       if(isRevealed(wiersz, kolumna)==1 || wiersz>wysokosc-1 || kolumna>szerokosc-1 || status==FINISHED_WIN) {};
 }

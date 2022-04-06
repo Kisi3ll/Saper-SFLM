@@ -19,11 +19,11 @@ void  MSTextController::play() {
         cout << "Odkryj pole [\"o\"] \n";
         cout << "Ustaw flage [\"f\"] \n";
         cin >> wybor;
-        if (wybor=='o' or wybor=='O')
+        if (wybor=='o' || wybor=='O')
         {
             plansza.revealField(wiersz-1,kolumna-1);
         }
-        else if(wybor=='f' or wybor=='F')
+        else if(wybor=='f' || wybor=='F')
         {
             plansza.toggleFlag(wiersz-1,kolumna-1);
         }

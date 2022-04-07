@@ -3,7 +3,7 @@
 #include "MSBoardTextView.h"
 
 using namespace std;
-MSTextController::MSTextController(Plansza &plansza, MSBoardTextView &widok):plansza(plansza), widok(widok){
+MSTextController::MSTextController(Plansza &m_plansza, MSBoardTextView &m_widok): plansza(m_plansza), widok(m_widok){
 
 }
 void  MSTextController::play() {

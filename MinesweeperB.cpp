@@ -3,29 +3,29 @@
 #include <ctime>
 #include "MinesweeperB.h"
 
-Plansza::Plansza(int szerokosc, int wysokosc, GameMode tryb):szerokosc(szerokosc), wysokosc(wysokosc), tryb(tryb){
-    plansza.resize(wysokosc,szerokosc);
+Plansza::Plansza(int m_szerokosc, int m_wysokosc, GameMode m_tryb): szerokosc(m_szerokosc), wysokosc(m_wysokosc), tryb(m_tryb){
+    plansza.resize(m_wysokosc, m_szerokosc);
 
     srand(time(nullptr));
-    switch (tryb) {
+    switch (m_tryb) {
         case DEBUG:
-          for(int kolumna=0;kolumna<szerokosc;kolumna++){
+          for(int kolumna=0; kolumna < m_szerokosc; kolumna++){
               plansza[0][kolumna].maMine=1;
           }
-          for(int wiersz=0;wiersz<wysokosc;wiersz+=2){
+          for(int wiersz=0; wiersz < m_wysokosc; wiersz+=2){
               plansza[wiersz][0].maMine=1;
           }
-            for(int wiersz=0;wiersz<wysokosc;wiersz++){
-                for(int kolumna=0;kolumna<szerokosc;kolumna++){
+            for(int wiersz=0; wiersz < m_wysokosc; wiersz++){
+                for(int kolumna=0; kolumna < m_szerokosc; kolumna++){
                     if(wiersz==kolumna)plansza[wiersz][kolumna].maMine=1;
                 }
             }
             break;
         case EASY://10% planszy zapełnione minami
-            liczbaMin=(szerokosc*wysokosc*10)/100;
+            liczbaMin= (m_szerokosc * m_wysokosc * 10) / 100;
             for(int bomby=0;bomby<liczbaMin;bomby++){
-                int Randomheight = rand() % wysokosc;
-                int Randomwidth = rand() % szerokosc;
+                int Randomheight = rand() % m_wysokosc;
+                int Randomwidth = rand() % m_szerokosc;
                 if(plansza[Randomheight][Randomwidth].maMine)
                     bomby-=1;
                 plansza[Randomheight][Randomwidth].maMine=1;
@@ -33,28 +33,28 @@ Plansza::Plansza(int szerokosc, int wysokosc, GameMode tryb):szerokosc(szerokosc
 
             break;
         case NORMAL://20% planszy zapełnione minami
-            liczbaMin=(szerokosc*wysokosc*20)/100;
+            liczbaMin= (m_szerokosc * m_wysokosc * 20) / 100;
             for(int bomby=0;bomby<liczbaMin;bomby++){
-                int Randomheight = rand() % wysokosc;
-                int Randomwidth = rand() % szerokosc;
+                int Randomheight = rand() % m_wysokosc;
+                int Randomwidth = rand() % m_szerokosc;
                 if(plansza[Randomheight][Randomwidth].maMine)
                     bomby-=1;
                 plansza[Randomheight][Randomwidth].maMine=1;
             }
             break;
         case HARD://30% planszy zapełnione minami
-            liczbaMin=(szerokosc*wysokosc*30)/100;
+            liczbaMin= (m_szerokosc * m_wysokosc * 30) / 100;
             for(int bomby=0;bomby<liczbaMin;bomby++){
-                int Randomheight = rand() % wysokosc;
-                int Randomwidth = rand() % szerokosc;
+                int Randomheight = rand() % m_wysokosc;
+                int Randomwidth = rand() % m_szerokosc;
                 if(plansza[Randomheight][Randomwidth].maMine)
                     bomby-=1;
                 plansza[Randomheight][Randomwidth].maMine=1;
             }
             break;
     }
-//    for(int wiersz=0;wiersz<wysokosc;wiersz++){
-//        for(int kolumna=0;kolumna<szerokosc;kolumna++){
+//    for(int wiersz=0;wiersz<m_wysokosc;wiersz++){
+//        for(int kolumna=0;kolumna<m_szerokosc;kolumna++){
 //            plansza[wiersz][kolumna].maMine=false;        //0 -> nie ma miny
 //            plansza[wiersz][kolumna].maFlage=false;       //0-> nie ma flagi
 //            plansza[wiersz][kolumna].czyUkryte=false;     //0-> ukryte

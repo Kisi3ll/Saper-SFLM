@@ -6,7 +6,7 @@ class Plansza;
 class MSBoardTextView {
     Plansza & plansza;
 public:
-    MSBoardTextView(Plansza & plansza);
+    MSBoardTextView(Plansza & m_plansza);
     void display();
 };
 

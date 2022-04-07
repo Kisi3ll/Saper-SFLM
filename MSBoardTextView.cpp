@@ -2,7 +2,7 @@
 #include "MSBoardTextView.h"
 #include "MinesweeperB.h"
 
-MSBoardTextView::MSBoardTextView (Plansza & plansza ) : plansza(plansza){
+MSBoardTextView::MSBoardTextView (Plansza & m_plansza ) : plansza(m_plansza){
 
 }
 

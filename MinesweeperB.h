@@ -21,7 +21,7 @@ class Plansza {
     int liczbaRuchow=0;
     bool isOutofBoard(int wiersz, int kolumna) const;
 public:
-    Plansza(int szerokosc, int wysokosc, GameMode tryb);
+    Plansza(int m_szerokosc, int m_wysokosc, GameMode m_tryb);
     void debug_display() const;
 
     int getBoardWidth() const;//

@@ -10,7 +10,7 @@ class MSTextController {
     Plansza &plansza;
     MSBoardTextView &widok;
 public:
-    MSTextController(Plansza &plansza, MSBoardTextView &widok);
+    MSTextController(Plansza &m_plansza, MSBoardTextView &m_widok);
     void play();
 };
 

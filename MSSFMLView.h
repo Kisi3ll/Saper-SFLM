@@ -1,4 +1,3 @@
-
 #ifndef SAPER_SFML_MSSFMLVIEW_H
 #define SAPER_SFML_MSSFMLVIEW_H
 #include "SFML/Graphics.hpp"

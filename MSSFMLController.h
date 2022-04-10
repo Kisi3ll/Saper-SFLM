@@ -1,11 +1,10 @@
 #ifndef SAPER_SFML_MSSFMLCONTROLLER_H
 #define SAPER_SFML_MSSFMLCONTROLLER_H
 
-#include <SFML/Window/Event.hpp>
 
 class Plansza;
 class MSSFMLView;
-namespace {
+namespace sf{
     class Event;
 }
 

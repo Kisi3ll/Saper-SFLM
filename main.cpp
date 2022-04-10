@@ -3,7 +3,6 @@
 #include "MinesweeperB.h"
 #include "MSSFMLView.h"
 #include "MSBoardTextView.h"
-#include "MSTextController.h"
 #include "MSSFMLController.h"
 #include <unistd.h>
 
@@ -21,22 +20,10 @@ int main()
 
     Plansza plansza(screenWidth, screenHeight, EASY);
     MSSFMLView view2 (plansza);  // przekazujemy przez referencję planszę jako argument konstruktora
-    MSBoardTextView view(plansza);
-    plansza.debug_display();
-    view.display();
+   // MSBoardTextView view(plansza);
+   // plansza.debug_display();
+   // view.display();
     MSSFMLController ctrl(plansza,view2);
-//    std::cout<<plansza.getFieldInfo(0,0);
-//    std::cout<<plansza.getFieldInfo(2,3);
-
-
-    // symulujemy rozgrywkę
-//    for(int wiersz=0;wiersz<plansza.getBoardHeight();wiersz++){
-//        for(int kolumna=0;kolumna<plansza.getBoardWidth();kolumna++) {
-//            plansza.revealField(wiersz,kolumna);
-//        }
-//    }
-//    plansza.toggleFlag(0,0);
-//    plansza.revealField(2,3);
 
     while (window.isOpen())
     {

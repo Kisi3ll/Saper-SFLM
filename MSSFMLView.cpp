@@ -14,7 +14,6 @@ MSSFMLView::MSSFMLView(Plansza & m_plansza) : plansza (m_plansza) {
     LOSE.setPosition(70,70);
     LOSE.setFillColor(sf::Color::Red);
 
-    // tu robimy rysowanie planszy na podstawie zawartości "m_plansza"
     //bool 	loadFromFile (const std::string &filename, const IntRect &area=IntRect())
     if(!t1.loadFromFile("../Saper-tekstury/t1.png"))abort();
     if(!t2.loadFromFile("../Saper-tekstury/t2.png"))abort();
@@ -44,20 +43,6 @@ MSSFMLView::MSSFMLView(Plansza & m_plansza) : plansza (m_plansza) {
 }
 
 void MSSFMLView::draw(sf::RenderWindow &win) {
-//    sf::RectangleShape r;
-//    r.setSize ( sf::Vector2f(10, 10) ) ;
-//    r.setFillColor ( sf::Color::Red );
-//    for(int wiersz=0;wiersz<plansza.getBoardHeight();wiersz++){
-//        for(int kolumna=0;kolumna<plansza.getBoardWidth();kolumna++) {
-//            r.setPosition(wiersz*40,kolumna*40);
-//            win.draw(r);
-//        }
-//    }
-//    sf::RectangleShape r;
-//    r.setSize ( sf::Vector2f(10, 10) ) ;
-//    r.setFillColor ( sf::Color::Red );
-//    sF.setPosition(400,300);
-//    win.draw(sF);
     float x=40,y=40;
     for(int wiersz=0;wiersz<plansza.getBoardHeight();wiersz++){
         for(int kolumna=0;kolumna<plansza.getBoardWidth();kolumna++) {

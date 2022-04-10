@@ -114,8 +114,6 @@ int Plansza::countMines(int wiersz, int kolumna) const {
     return licznik;
 }
 
-
-
 // return true if the field at (row,col) position was marked with flag
 // return false if any of the following is true:
 // - row or col is outside board
@@ -134,8 +132,6 @@ bool Plansza::hasFlag(int wiersz, int kolumna) const{
 // - field was already revealed
 // - either row or col is outside board
 // - game is already finished
-//  void toggleFlag(int row, int col);
-
 void Plansza::toggleFlag(int wiersz, int kolumna){
       if(isOutofBoard(wiersz,kolumna)==1) return;
       if(isRevealed(wiersz, kolumna)==0 && plansza[wiersz][kolumna].maFlage==0){
@@ -160,7 +156,6 @@ void Plansza::toggleFlag(int wiersz, int kolumna){
 // If the field was not revealed and there is a mine on it:
 // - if its the first player action - move mine to another location, reveal field (not in DEBUG mode!)
 // - reveal it and finish game
-//  void revealField(int row, int col);
 void Plansza::revealField(int wiersz, int kolumna){
     liczbaRuchow++;
     if(isOutofBoard(wiersz,kolumna)== true) return;
@@ -208,7 +203,6 @@ bool Plansza::isRevealed(int wiersz, int kolumna) const{
 // - FINISHED_LOSS - if the player revealed field with mine
 // - FINISHED_WIN  - if the player won the game (all unrevealed fields have mines)
 // - RUNNING       - if the game is not yet finished
-
 GameState Plansza::getGameState() const{
     for(int wiersz=0;wiersz<wysokosc;wiersz++){
         for(int kolumna=0;kolumna<szerokosc;kolumna++){
@@ -233,15 +227,16 @@ GameState Plansza::getGameState() const{
 // if the field is revealed and has 0 mines around        - return ' ' (space) character
 // if the field is revealed and has some mines around     - return '1' ... '8' (number of mines as a digit)
 char Plansza::getFieldInfo(int wiersz, int kolumna) const{
-    if(isOutofBoard(wiersz,kolumna)== true) return '#';//jeśli w i k poza planszą
-    if(isRevealed(wiersz, kolumna)==0 && hasFlag(wiersz, kolumna)==1) return 'F';//jeśli pole ukryte i ma flagę
-    if(isRevealed(wiersz, kolumna)==0 && hasFlag(wiersz, kolumna)==0) return '_';//jeśli pole ukryte i nie ma flagi
-    if(isRevealed(wiersz, kolumna)==1 && plansza[wiersz][kolumna].maMine==1) return 'x';//jeśli pole odkryte i ma mine
-    if(isRevealed(wiersz, kolumna)==1 && countMines(wiersz, kolumna)==0) return ' ';//jeśli pole okryte i ma 0 min do okoła
-    if(isRevealed(wiersz, kolumna)==1 && countMines(wiersz, kolumna)>0) return '0' + countMines(wiersz, kolumna);//jeśli pole odkryte i ma n min do okoła
+    if(isOutofBoard(wiersz,kolumna)== true) return '#';                                     //jeśli w i k poza planszą
+    if(isRevealed(wiersz, kolumna)==0 && hasFlag(wiersz, kolumna)==1) return 'F';           //jeśli pole ukryte i ma flagę
+    if(isRevealed(wiersz, kolumna)==0 && hasFlag(wiersz, kolumna)==0) return '_';           //jeśli pole ukryte i nie ma flagi
+    if(isRevealed(wiersz, kolumna)==1 && plansza[wiersz][kolumna].maMine==1) return 'x';    //jeśli pole odkryte i ma mine
+    if(isRevealed(wiersz, kolumna)==1 && countMines(wiersz, kolumna)==0) return ' ';        //jeśli pole okryte i ma 0 min do okoła
+    if(isRevealed(wiersz, kolumna)==1 && countMines(wiersz, kolumna)>0) return '0' + countMines(wiersz, kolumna);   //jeśli pole odkryte i ma n min do okoła
     return '!';
 }
 
+//return true only if row or col is out of the board else return false
 bool Plansza::isOutofBoard(int wiersz, int kolumna) const
 {
     if (wiersz>=wysokosc or kolumna>=szerokosc) return true;

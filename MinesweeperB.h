@@ -1,6 +1,6 @@
-#include "Array2D.h"
 #ifndef MINESBOARD_H__
 #define MINESBOARD_H__
+#include "Array2D.h"
 
 enum GameMode  { DEBUG, EASY, NORMAL, HARD };
 enum GameState { RUNNING, FINISHED_WIN, FINISHED_LOSS };
@@ -41,10 +41,6 @@ public:
     GameState getGameState() const;//
 
     char getFieldInfo(int row, int col) const;//
-
-
 };
-
-
 
 #endif

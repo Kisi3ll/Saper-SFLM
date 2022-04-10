@@ -5,7 +5,13 @@
 
 Plansza::Plansza(int m_szerokosc, int m_wysokosc, GameMode m_tryb): szerokosc(m_szerokosc), wysokosc(m_wysokosc), tryb(m_tryb){
     plansza.resize(m_wysokosc, m_szerokosc);
-
+    for (int wiersz=0;wiersz<wysokosc;wiersz++)
+    {
+        for (int kolumna=0;kolumna<szerokosc;kolumna++)
+        {
+            plansza[wiersz][kolumna] = {0,0,0};
+        }
+    }
     srand(time(nullptr));
     switch (m_tryb) {
         case DEBUG:
@@ -53,17 +59,6 @@ Plansza::Plansza(int m_szerokosc, int m_wysokosc, GameMode m_tryb): szerokosc(m_
             }
             break;
     }
-//    for(int wiersz=0;wiersz<m_wysokosc;wiersz++){
-//        for(int kolumna=0;kolumna<m_szerokosc;kolumna++){
-//            plansza[wiersz][kolumna].maMine=false;        //0 -> nie ma miny
-//            plansza[wiersz][kolumna].maFlage=false;       //0-> nie ma flagi
-//            plansza[wiersz][kolumna].czyUkryte=false;     //0-> ukryte
-//            plansza[0][0].maMine=1;
-//            plansza[1][1].czyUkryte=1;
-//            plansza[0][2].maMine=1;
-//            plansza[0][2].maFlage=1;
-//        }
-//    }
 }
 void Plansza::debug_display() const
 {
@@ -106,11 +101,10 @@ int Plansza::getMineCount() const{
 // - countMines(2,1) should return 3
 // - countMines(6,7) should return 2
 int Plansza::countMines(int wiersz, int kolumna) const {
-    if(isOutofBoard(wiersz,kolumna)== true) return -1;//do poprawy **
-    //if(plansza[wiersz][kolumna].czyUkryte==0) return -1;
+    if(isOutofBoard(wiersz,kolumna)== true) return -1;
     int licznik = 0;
-    for (int i = (-1); i <= 1; i++) {
-        for (int j = (-1); j <= 1; j++) {
+    for (int i = -1; i <= 1; i++) {
+        for (int j = -1; j <= 1; j++) {
             if ((wiersz + i) < 0 || (kolumna + j) < 0) continue;
             if ((wiersz + i) > szerokosc-1 || (kolumna + j) > wysokosc-1) continue;
             if (plansza[wiersz + i][kolumna + j].maMine==true) licznik++;
@@ -130,7 +124,6 @@ int Plansza::countMines(int wiersz, int kolumna) const {
 bool Plansza::hasFlag(int wiersz, int kolumna) const{
     if(isOutofBoard(wiersz,kolumna)== true) return false;
     if(plansza[wiersz][kolumna].maFlage==1) return true;
-    //if(wiersz>wysokosc-1 || kolumna>szerokosc-1) return false;
     if(plansza[wiersz][kolumna].maFlage==0) return false;
     if(plansza[wiersz][kolumna].czyUkryte==0) return false;
     return 0;
@@ -144,9 +137,16 @@ bool Plansza::hasFlag(int wiersz, int kolumna) const{
 //  void toggleFlag(int row, int col);
 
 void Plansza::toggleFlag(int wiersz, int kolumna){
-      if(isOutofBoard(wiersz,kolumna)==1) return ;
-      if(isRevealed(wiersz, kolumna)==0) plansza[wiersz][kolumna].maFlage=1;
-      if(isRevealed(wiersz, kolumna)==1 || wiersz>wysokosc-1 || kolumna>szerokosc-1 || status==FINISHED_WIN) {};
+      if(isOutofBoard(wiersz,kolumna)==1) return;
+      if(isRevealed(wiersz, kolumna)==0 && plansza[wiersz][kolumna].maFlage==0){
+          plansza[wiersz][kolumna].maFlage=1;
+          return;
+      }
+      if(isRevealed(wiersz, kolumna)==0 && plansza[wiersz][kolumna].maFlage==1){
+          plansza[wiersz][kolumna].maFlage=0;
+          return;
+      }
+      if(isRevealed(wiersz, kolumna)==1 || status==FINISHED_WIN) {};
 }
 
 // try to reveal the field at (row,col)
@@ -163,10 +163,13 @@ void Plansza::toggleFlag(int wiersz, int kolumna){
 //  void revealField(int row, int col);
 void Plansza::revealField(int wiersz, int kolumna){
     liczbaRuchow++;
-    if(isRevealed(wiersz, kolumna)==1 || isOutofBoard(wiersz,kolumna)== true || status==FINISHED_WIN || hasFlag(wiersz, kolumna)==1) return;
+    if(isOutofBoard(wiersz,kolumna)== true) return;
+    if(isRevealed(wiersz, kolumna)==1) return;
+    if(getGameState()==FINISHED_WIN || getGameState()==FINISHED_LOSS) return;
+    if(hasFlag(wiersz,kolumna)==1)return;
     if(isRevealed(wiersz, kolumna)==0 && plansza[wiersz][kolumna].maMine==0) plansza[wiersz][kolumna].czyUkryte=1;
     if(isRevealed(wiersz, kolumna)==0 && plansza[wiersz][kolumna].maMine==1){
-        if(liczbaRuchow==1){
+        if(liczbaRuchow==1 && tryb!=DEBUG){
             plansza[wiersz][kolumna].maMine=0;
             liczbaMin=1;
             for(int bomby=0;bomby<liczbaMin;bomby++){
@@ -182,6 +185,16 @@ void Plansza::revealField(int wiersz, int kolumna){
             plansza[wiersz][kolumna].czyUkryte=1;
             status=FINISHED_LOSS;
         }
+    }
+    if (countMines(wiersz, kolumna)==0){
+        revealField(wiersz-1, kolumna);
+        revealField(wiersz, kolumna-1);
+        revealField(wiersz+1, kolumna);
+        revealField(wiersz, kolumna+1);
+        revealField(wiersz-1, kolumna-1);
+        revealField(wiersz-1, kolumna+1);
+        revealField(wiersz+1, kolumna-1);
+        revealField(wiersz+1, kolumna+1);
     }
 }
 
@@ -235,4 +248,3 @@ bool Plansza::isOutofBoard(int wiersz, int kolumna) const
     if (wiersz<0 or kolumna<0 ) return true;
     return false;
 }
-//};

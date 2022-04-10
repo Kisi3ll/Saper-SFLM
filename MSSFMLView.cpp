@@ -1,28 +1,33 @@
 #include "MSSFMLView.h"
 #include "SFML/Graphics.hpp"
-#include "SFML/Window.hpp"
-#include "MSBoardTextView.h"
 #include "MinesweeperB.h"
 
 MSSFMLView::MSSFMLView(Plansza & m_plansza) : plansza (m_plansza) {
+    if(!font.loadFromFile("../Font/times.ttf"))abort();
+    WIN.setFont(font);
+    WIN.setString("YOU WON!");
+    WIN.setPosition(70,70);
+    WIN.setFillColor(sf::Color::Green);
+
+    LOSE.setFont(font);
+    LOSE.setString("YOU LOST!");
+    LOSE.setPosition(70,70);
+    LOSE.setFillColor(sf::Color::Red);
+
     // tu robimy rysowanie planszy na podstawie zawartości "m_plansza"
     //bool 	loadFromFile (const std::string &filename, const IntRect &area=IntRect())
-    if(!t1.loadFromFile("../Saper-tekstury/t1.png")){
-        abort();
-    }
-    t2.loadFromFile("../Saper-tekstury/t2.png");
-    t3.loadFromFile("../Saper-tekstury/t3.png");
-    t4.loadFromFile("../Saper-tekstury/t4.png");
-    t5.loadFromFile("../Saper-tekstury/t5.png");
-    t6.loadFromFile("../Saper-tekstury/t6.png");
-    t7.loadFromFile("../Saper-tekstury/t7.png");
-    t8.loadFromFile("../Saper-tekstury/t8.png");
-    F.loadFromFile("../Saper-tekstury/F.png");
-    M.loadFromFile("../Saper-tekstury/M.png");
-    if(!Pu.loadFromFile("../Saper-tekstury/t0.png")){
-        abort();
-    }
-    Po.loadFromFile("../Saper-tekstury/ot0.png");
+    if(!t1.loadFromFile("../Saper-tekstury/t1.png"))abort();
+    if(!t2.loadFromFile("../Saper-tekstury/t2.png"))abort();
+    if(!t3.loadFromFile("../Saper-tekstury/t3.png"))abort();
+    if(!t4.loadFromFile("../Saper-tekstury/t4.png"))abort();
+    if(!t5.loadFromFile("../Saper-tekstury/t5.png"))abort();
+    if(!t6.loadFromFile("../Saper-tekstury/t6.png"))abort();
+    if(!t7.loadFromFile("../Saper-tekstury/t7.png"))abort();
+    if(!t8.loadFromFile("../Saper-tekstury/t8.png"))abort();
+    if(!F.loadFromFile("../Saper-tekstury/F.png"))abort();
+    if(!M.loadFromFile("../Saper-tekstury/M.png"))abort();
+    if(!Pu.loadFromFile("../Saper-tekstury/t0.png"))abort();
+    if(!Po.loadFromFile("../Saper-tekstury/ot0.png"))abort();
 
    s1.setTexture(t1);
    s2.setTexture(t2);
@@ -53,7 +58,7 @@ void MSSFMLView::draw(sf::RenderWindow &win) {
 //    r.setFillColor ( sf::Color::Red );
 //    sF.setPosition(400,300);
 //    win.draw(sF);
-    float x=42,y=42;
+    float x=40,y=40;
     for(int wiersz=0;wiersz<plansza.getBoardHeight();wiersz++){
         for(int kolumna=0;kolumna<plansza.getBoardWidth();kolumna++) {
             s1.setPosition(x*(float)kolumna,y*(float)wiersz);
@@ -80,7 +85,8 @@ void MSSFMLView::draw(sf::RenderWindow &win) {
             sPu.setScale(2,2);
             sPo.setPosition(x*(float)kolumna,y*(float)wiersz);
             sPo.setScale(2,2);
-
+            if(plansza.getGameState()==FINISHED_WIN)win.draw(WIN);
+            if(plansza.getGameState()==FINISHED_LOSS)win.draw(LOSE);
             switch (plansza.getFieldInfo(wiersz,kolumna)) {
                 case '_':
                     win.draw(sPu);

@@ -35,6 +35,6 @@ endif(WIN32)
 #znajdowanie odpowiednich komponentów z biblioteki SFML
 find_package(SFML 2 COMPONENTS window graphics audio REQUIRED)
 
-add_executable(Saper-SFML main.cpp MinesweeperB.cpp MSBoardTextView.cpp MSTextController.cpp MSSFMLView.cpp )
+add_executable(Saper-SFML main.cpp MinesweeperB.cpp MSBoardTextView.cpp MSTextController.cpp MSSFMLView.cpp MSSFMLController.cpp )
 #jakie dodatkowe nistandardowe biblioteki z SFML'a chcemy dołączyć
 target_link_libraries(Saper-SFML sfml-window sfml-graphics sfml-audio)

@@ -142,7 +142,7 @@ void Plansza::toggleFlag(int wiersz, int kolumna){
           plansza[wiersz][kolumna].maFlage=0;
           return;
       }
-      if(isRevealed(wiersz, kolumna)==1 || status==FINISHED_WIN) {};
+    if(isRevealed(wiersz, kolumna)==1 || status==FINISHED_WIN) return;
 }
 
 // try to reveal the field at (row,col)

@@ -7,7 +7,6 @@ class MSSFMLView;
 namespace sf{
     class Event;
 }
-
 class MSSFMLController {
     Plansza &plansza;
     MSSFMLView &view;

@@ -8,11 +8,17 @@ MSSFMLView::MSSFMLView(Plansza & m_plansza) : plansza (m_plansza) {
     WIN.setString("YOU WON!");
     WIN.setPosition(70,70);
     WIN.setFillColor(sf::Color::Green);
+    WIN.setCharacterSize(50);
+    WIN.setOutlineColor(sf::Color::Black);
+    WIN.setOutlineThickness(5);
 
     LOSE.setFont(font);
     LOSE.setString("YOU LOST!");
     LOSE.setPosition(70,70);
     LOSE.setFillColor(sf::Color::Red);
+    LOSE.setCharacterSize(50);
+    LOSE.setOutlineColor(sf::Color::Black);
+    LOSE.setOutlineThickness(5);
 
     //bool 	loadFromFile (const std::string &filename, const IntRect &area=IntRect())
     if(!t1.loadFromFile("../Saper-tekstury/t1.png"))abort();

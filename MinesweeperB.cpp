@@ -5,10 +5,8 @@
 
 Plansza::Plansza(int m_szerokosc, int m_wysokosc, GameMode m_tryb): szerokosc(m_szerokosc), wysokosc(m_wysokosc), tryb(m_tryb){
     plansza.resize(m_wysokosc, m_szerokosc);
-    for (int wiersz=0;wiersz<wysokosc;wiersz++)
-    {
-        for (int kolumna=0;kolumna<szerokosc;kolumna++)
-        {
+    for (int wiersz=0;wiersz<wysokosc;wiersz++){
+        for (int kolumna=0;kolumna<szerokosc;kolumna++){
             plansza[wiersz][kolumna] = {0,0,0};
         }
     }
@@ -105,8 +103,9 @@ int Plansza::countMines(int wiersz, int kolumna) const {
     int licznik = 0;
     for (int i = -1; i <= 1; i++) {
         for (int j = -1; j <= 1; j++) {
-            if ((wiersz + i) < 0 || (kolumna + j) < 0) continue;
-            if ((wiersz + i) > szerokosc-1 || (kolumna + j) > wysokosc-1) continue;
+            //if ((wiersz + i) < 0 || (kolumna + j) < 0) continue;
+            //if ((wiersz + i) > wysokosc-1 || (kolumna + j) > szerokosc-1) continue;
+            if(isOutofBoard(wiersz+i,kolumna+j)== true) continue;
             if (plansza[wiersz + i][kolumna + j].maMine==true) licznik++;
         }
     }
@@ -182,14 +181,19 @@ void Plansza::revealField(int wiersz, int kolumna){
         }
     }
     if (countMines(wiersz, kolumna)==0){
-        revealField(wiersz-1, kolumna);
-        revealField(wiersz, kolumna-1);
-        revealField(wiersz+1, kolumna);
-        revealField(wiersz, kolumna+1);
-        revealField(wiersz-1, kolumna-1);
-        revealField(wiersz-1, kolumna+1);
-        revealField(wiersz+1, kolumna-1);
-        revealField(wiersz+1, kolumna+1);
+//        revealField(wiersz-1, kolumna);
+//        revealField(wiersz, kolumna-1);
+//        revealField(wiersz+1, kolumna);
+//        revealField(wiersz, kolumna+1);
+//        revealField(wiersz-1, kolumna-1);
+//        revealField(wiersz-1, kolumna+1);
+//        revealField(wiersz+1, kolumna-1);
+//        revealField(wiersz+1, kolumna+1);
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                revealField(wiersz+i,kolumna+j);
+            }
+        }
     }
 }
 

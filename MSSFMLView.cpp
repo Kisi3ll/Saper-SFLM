@@ -6,17 +6,18 @@ MSSFMLView::MSSFMLView(Plansza & m_plansza) : plansza (m_plansza) {
     if(!font.loadFromFile("../Font/times.ttf"))abort();
     WIN.setFont(font);
     WIN.setString("YOU WON!");
-    WIN.setPosition(70,70);
+    WIN.setPosition(plansza.getBoardWidth()/2+50,plansza.getBoardHeight()/2+40);
     WIN.setFillColor(sf::Color::Green);
-    WIN.setCharacterSize(50);
+    WIN.setCharacterSize(plansza.getBoardWidth()*5);
     WIN.setOutlineColor(sf::Color::Black);
     WIN.setOutlineThickness(5);
 
     LOSE.setFont(font);
     LOSE.setString("YOU LOST!");
-    LOSE.setPosition(70,70);
+    //LOSE.setPosition(plansza.getBoardWidth()/2*20,plansza.getBoardHeight()/2*20);
+    LOSE.setPosition(plansza.getBoardWidth()/2+50,plansza.getBoardHeight()/2+40);
     LOSE.setFillColor(sf::Color::Red);
-    LOSE.setCharacterSize(50);
+    LOSE.setCharacterSize(plansza.getBoardWidth()*5);
     LOSE.setOutlineColor(sf::Color::Black);
     LOSE.setOutlineThickness(5);
 

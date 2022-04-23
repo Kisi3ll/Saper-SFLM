@@ -8,7 +8,7 @@ MSSFMLController::MSSFMLController(Plansza &p, MSSFMLView &v):plansza(p),view(v)
 void MSSFMLController::handleEvents(sf::Event &event) {
     if (event.type == sf::Event::MouseButtonReleased){
         if (event.mouseButton.button == sf::Mouse::Right){
-//            std::cout << "the right button was pressed" << std::endl;
+//            std::cout << "PPM" << std::endl;
 //            std::cout << "mouse x: " << event.mouseButton.x << std::endl;
 //            std::cout << "mouse y: " << event.mouseButton.y << std::endl;
             int row = (event.mouseButton.y)/40;
@@ -17,7 +17,7 @@ void MSSFMLController::handleEvents(sf::Event &event) {
 
         }
         if (event.mouseButton.button == sf::Mouse::Left){
-//            std::cout << "the left button was pressed" << std::endl;
+//            std::cout << "LPM" << std::endl;
 //            std::cout << "mouse x: " << event.mouseButton.x << std::endl;
 //            std::cout << "mouse y: " << event.mouseButton.y << std::endl;
             int row = (event.mouseButton.y)/40;

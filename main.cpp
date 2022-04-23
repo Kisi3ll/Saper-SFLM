@@ -10,20 +10,20 @@ int main()
 {
     const int filedWidth=40;
     const int filedHeight=40;
-    const int screenWidth=10;
-    const int screenHeight=10;
-    //char bufor[200];
-    //std::cout<<getcwd(bufor,200)<<std::endl;
+    const int screenWidth=5;
+    const int screenHeight=12;
+//    char bufor[200];
+//    std::cout<<getcwd(bufor,200)<<std::endl;
 
     sf::RenderWindow window(sf::VideoMode(filedWidth*screenWidth, filedHeight*screenHeight), "SAPER",sf::Style::Titlebar |  sf::Style::Close);
     //window.setVerticalSyncEnabled(false);
     window.setFramerateLimit(30);
 
-    Plansza plansza(screenWidth, screenHeight, EASY);
+    Plansza plansza(screenWidth, screenHeight, DEBUG);
     MSSFMLView view (plansza);  // przekazujemy przez referencję planszę jako argument konstruktora
-   // MSBoardTextView view2(plansza);
-   // plansza.debug_display();
-   // view2.display();
+    //MSBoardTextView view2(plansza);
+    //plansza.debug_display();
+    //view2.display();
     MSSFMLController ctrl(plansza,view);
 
     while (window.isOpen())
@@ -39,13 +39,11 @@ int main()
                 continue;
             }
             ctrl.handleEvents(event);
-
         }
 
         window.clear();
         view.draw(window);
         window.display();
     }
-
     return 0;
 }

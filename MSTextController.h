@@ -4,6 +4,7 @@
 
 
 class Plansza;
+
 class MSBoardTextView;
 
 class MSTextController {
@@ -11,6 +12,7 @@ class MSTextController {
     MSBoardTextView &widok;
 public:
     MSTextController(Plansza &m_plansza, MSBoardTextView &m_widok);
+
     void play();
 };
 

@@ -3,8 +3,9 @@
 
 
 class Plansza;
+
 class MSSFMLView;
-namespace sf{
+namespace sf {
     class Event;
 }
 class MSSFMLController {
@@ -12,8 +13,8 @@ class MSSFMLController {
     MSSFMLView &view;
 public:
     MSSFMLController(Plansza &plansza, MSSFMLView &view);
+
     void handleEvents(sf::Event &event);
 };
-
 
 #endif //SAPER_SFML_MSSFMLCONTROLLER_H

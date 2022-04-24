@@ -4,9 +4,10 @@
 class Plansza;
 
 class MSBoardTextView {
-    Plansza & plansza;
+    Plansza &plansza;
 public:
-    explicit MSBoardTextView(Plansza & m_plansza);
+    explicit MSBoardTextView(Plansza &m_plansza);
+
     void display();
 };
 

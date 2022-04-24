@@ -42,5 +42,4 @@ public:
 
     char getFieldInfo(int row, int col) const;//
 };
-
 #endif
